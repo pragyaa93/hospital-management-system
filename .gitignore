@@ -1,0 +1,12 @@
+# build and binary files
+/build/
+*.o
+*.exe
+*.out
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# macOS
+.DS_Store

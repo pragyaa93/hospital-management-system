@@ -3,10 +3,17 @@
 *.o
 *.exe
 *.out
+hms
 
 # IDE/editor files
 .vscode/
 .idea/
+*.suo
+*.user
+*.log
 
 # macOS
 .DS_Store
+
+# temporary
+*.tmp

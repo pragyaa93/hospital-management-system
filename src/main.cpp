@@ -48,16 +48,13 @@ int main() {
         std::cout << "1. List Patients\n2. Add Patient\n3. Edit Patient\n4. Delete Patient\n5. Search Patients by name\n";
         std::cout << "6. List Doctors\n7. Add Doctor\n8. Edit Doctor\n9. Delete Doctor\n10. Search Doctors by name\n";
         std::cout << "11. List Appointments\n12. Book Appointment\n13. Generate Bill for Appointment\n14. List Bills\n15. Save & Exit\n";
+
         int choice = readInt("Choose option: ");
 
         try {
             if (choice == 1) {
-                auto &apts = hosp.getAllAppointments(); // just to ensure compiled; patients listing next
                 std::cout << "\nPatients:\n";
-                // We don't have a getter for patients; list indirectly via CSV or reflection. To keep simple, load then search by id 1..nextId-1
-                // But Hospital doesn't expose nextPatientId publicly; so we will search by printing by searching name wildcard
-                std::string q = "";
-                auto results = hosp.searchPatientsByName(q); // q="" returns everyone because we check contains; but implementation lower-cases and looks for q in name -> empty matches all
+                auto results = hosp.searchPatientsByName(""); // empty → list all
                 for (const auto &p : results) std::cout << p << "\n";
                 pause();
             }
@@ -95,7 +92,7 @@ int main() {
             }
             else if (choice == 6) {
                 std::cout << "\nDoctors:\n";
-                auto res = hosp.searchDoctorsByName(""); // empty -> list all
+                auto res = hosp.searchDoctorsByName(""); // empty → list all
                 for (auto &d : res) std::cout << d << "\n";
                 pause();
             }
@@ -173,7 +170,8 @@ int main() {
             else {
                 std::cout << "Unknown option.\n";
             }
-        } catch (const std::exception &ex) {
+        }
+        catch (const std::exception &ex) {
             std::cout << "Error: " << ex.what() << "\n";
             pause();
         }
